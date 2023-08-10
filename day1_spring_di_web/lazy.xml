@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>	
+	<bean id="first" class="com.lhs.spring.ex3.First" lazy-init="false"></bean>
+	<bean id="second" class="com.lhs.spring.ex3.Second" lazy-init="true"></bean>
+	<bean id="third" class="com.lhs.spring.ex3.Third" lazy-init="default"></bean>
+</beans>
