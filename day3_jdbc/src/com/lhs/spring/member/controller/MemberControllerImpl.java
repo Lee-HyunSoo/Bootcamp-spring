@@ -5,10 +5,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.lhs.spring.member.service.MemberService;
+import com.lhs.spring.member.service.MemberServiceImpl;
 import com.lhs.spring.member.vo.MemberVO;
 
 public class MemberControllerImpl extends MultiActionController implements MemberController {
