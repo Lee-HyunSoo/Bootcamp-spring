@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+   
+    <bean id="boardUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+      <property name="mappings">
+         <props>
+            <prop key="/board/*.do">boardController</prop>
+         </props>
+      </property>	
+   </bean>
+   
+   <bean id="boardController" class="com.lhs.controller.BoardControllerImpl">
+      <!-- 상속받은 MultiActionController 내에 존재하는 methodNameResolver를 사용해 controller 내에 있는 메서드들을 읽는다. -->
+      <property name="methodNameResolver">
+         <ref local="boardMethodResolver"/>
+      </property>
+      <property name="boardService" ref="boardService"/>
+   </bean>
+
+	<!-- MultiActionConroller 내에 key, value 형태로 요청URL, 실행할 메서드 저장 -->
+   <bean id="boardMethodResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver" >
+      <property name="mappings">
+        <props>
+          <prop key="/board/listBoards.do">listBoards</prop>
+          <prop key="/board/insertBoard.do">insertBoard</prop>
+          <prop key="/board/deleteBoard.do">deleteBoard</prop>
+          <prop key="/board/boardForm.do">boardForm</prop>
+       </props>
+      </property>
+   </bean>
+   
+   	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+      <property name="prefix" value="/WEB-INF/views/board/" /> 
+      <property name="suffix" value=".jsp"/>
+   </bean>
+   
+</beans>
