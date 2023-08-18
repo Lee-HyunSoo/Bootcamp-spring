@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.board">
+
+	<select id="selectAllBoards" resultType="boardVO">
+		<![CDATA[
+			select * from t_board order by articleNo desc	 	
+		]]>
+	</select>
+
+	<insert id="insertBoard" parameterType="boardVO">
+		<![CDATA[
+			insert into t_board(ARTICLENO, TITLE, CONTENT, ID) values(#{articleNo}, #{title}, #{content}, 'lee')
+		]]>      
+	</insert>
+	 
+	<delete id="deleteBoard" parameterType="String">
+		<![CDATA[
+			delete from t_board where ARTICLENO=#{articleNo}
+		]]>      
+	</delete>
+	
+	<select id="findMaxArticleNo" resultType="int">
+		<![CDATA[
+			select MAX(ARTICLENO) from t_board
+		]]>
+	</select>
+          
+</mapper>
